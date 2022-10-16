@@ -1,42 +1,51 @@
 $(function(){
+    const productCount = $('.product__adding-input'); 
     $('.product__adding-plus').click(function(){
-        var current_input =parseInt( $('.product__adding-input').val());
-        $('.product__adding-input').val(current_input + 1);
-        $('.product__adding-minus').css('color', 'black');
+        let currentInput = parseInt(productCount.val());
+        $('.product__adding-input').val(currentInput + 1);
+        $('.product__adding-minus').addClass('product__adding--able');
     });
     $('.product__adding-minus').click(function(){
-        var current_input = parseInt($('.product__adding-input').val());
-        if(current_input < 2){
+        let currentInput =parseInt(productCount.val());
+        if(currentInput < 2){
             return false;
         }
         else{
-            $('.product__adding-input').val(current_input - 1);
+            $('.product__adding-input').val(currentInput - 1);
         }   
-        if(current_input == 2){
-            $('.product__adding-minus').css('color', '#D9D9D9');
+        if(currentInput == 2){
+            $('.product__adding-minus').removeClass('product__adding--able');
         }    
     });
     $('.product__adding-input').change(function() {
-        var current_input = parseInt($('.product__adding-input'));
-        if(!current_input.val() || current_input.val() < 0){
-            $('.product__adding-input').val('1');
+        let currentInput = parseInt(productCount.val());
+        if(!currentInput || currentInput < 0){
+            $('.product__adding-input').val(1);
+            $('.product__adding-minus').removeClass('product__adding--able');
         }
         else{
-            $('.product__adding-input').val(Math.round(current_input.val()));
-            if(current_input.val() == 1){
-                $('.product__adding-minus').css('color', '#D9D9D9');
+            $('.product__adding-input').val(Math.round(currentInput));
+            if(currentInput == 1){
+                $('.product__adding-minus').removeClass('product__adding--able');
             } 
             else{
-                $('.product__adding-minus').css('color', 'black');
+                $('.product__adding-minus').addClass('product__adding--able');
             }
         }
     });
     $('.product__adding-button--blue').click(function(){
-        var current_input = $('.product__adding-input').val();
+        let currentInput = parseInt(productCount.val());
 
-        current_input == '1' ? $('.product__adding-button--blue').notify("В корзину добавлен " + current_input + " товар","info") 
-        : current_input == '2' || current_input == '3' || current_input == '4' ? $('.product__adding-button--blue').notify("В корзину добавлено " + current_input + " товара","info")
-        : $('.product__adding-button--blue').notify("В корзину добавлено " + current_input + " товаров","info");
+        currentInput == '1' ? $('.product__adding-button--blue').notify("В корзину добавлен " + currentInput + " товар","info") 
+        : currentInput == '2' || currentInput == '3' || currentInput == '4' ? $('.product__adding-button--blue').notify("В корзину добавлено " + currentInput + " товара","info")
+        : $('.product__adding-button--blue').notify("В корзину добавлено " + currentInput + " товаров","info");
         
+    });
+    $('.product__gallery-image img').mouseover(function(){
+        let image = $(this).prop('src');
+        $('.product__picture--picture').prop('src', image);
+    });
+    $('.product__gallery-image img').mouseout(function(){
+        $('.product__picture--picture').prop('src', 'http://localhost:52330/picture/main_shirt.jpg');
     });
 });
