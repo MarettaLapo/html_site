@@ -42,10 +42,10 @@ $(function(){
         
     });
     $('.product__gallery-image img').mouseover(function(){
-        let image = $(this).prop('src');
-        $('.product__picture--picture').prop('src', image);
+        let image = $(this).attr('src');
+        $('.product__picture--picture').attr('src', image);
     });
     $('.product__gallery-image img').mouseout(function(){
-        $('.product__picture--picture').prop('src', 'http://localhost:52330/picture/main_shirt.jpg');
+        $('.product__picture--picture').attr('src', 'http://localhost:52330/picture/main_shirt.jpg');
     });
 });
